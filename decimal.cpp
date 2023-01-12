@@ -16,6 +16,7 @@ float DecimalRounding(int Decimal, float UserNumber) {
     answer = answer / (10 * (Decimal * Decimal));
 
     UserNumber = answer;
+
 }
 
 int main() {
