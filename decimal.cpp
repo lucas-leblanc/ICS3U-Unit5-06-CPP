@@ -4,42 +4,48 @@
 // Created on: Jan 2023
 // This program rounds numbers
 
+#include <cmath>
 #include <iostream>
 #include <string>
 
-float DecimalRounding(int Decimal, float UserNumber) {
-    // This function rounds numbers
-    float answer;
+float roundOffNumber(float &decimalNumber, int decimalPlaces) {
+    // This function rounds off numbers
+    float roundedOff;
+    int tempInt;
 
-    answer = UserNumber * (10 * (Decimal * Decimal));
-    answer = static_cast<int>(answer + 0.5);
-    answer = answer / (10 * (Decimal * Decimal));
+    // pow() is a power function
+    roundedOff = decimalNumber * pow(10, decimalPlaces);
+    roundedOff = (roundedOff + 0.5);
+    // static_cast converts ints and floats
+    roundedOff = static_cast<int>(roundedOff);
+    roundedOff = roundedOff / pow(10, decimalPlaces);
 
-    UserNumber = answer;
+    decimalNumber = roundedOff;
 
 }
 
 int main() {
-    std::string NumberFromUser;
-    std::string DecimalFromUser;
-    int DecimalReal;
-    float UserNumberReal;
-    float FinalAnswer;
+    std::string userNumberString;
+    std::string decimalPlacesString;
+    int decimalPlaces;
+    float userNumber;
+    float roundedNumber;
 
     std::cout << "Enter the number you want to round: ";
-    std::cin >> NumberFromUser;
+    std::cin >> userNumberString;
     std::cout << "" << std::endl;
     std::cout << "Enter the decimal places you want to round by: ";
-    std::cin >> DecimalFromUser;
+    std::cin >> decimalPlacesString;
     std::cout << "" << std::endl;
 
     try {
-        UserNumberReal = std::stof(NumberFromUser);
-        DecimalReal = std::stoi(DecimalFromUser);
+        userNumber = std::stof(userNumberString);
+        decimalPlaces = std::stoi(decimalPlacesString);
 
-        FinalAnswer = DecimalRounding(DecimalReal, UserNumberReal);
+        // calls function
+        roundOffNumber(userNumber, decimalPlaces);
 
-        std::cout << "The rounded number is " << FinalAnswer << std::endl;
+        std::cout << "The rounded number is " << userNumber << std::endl;
     } catch (std::invalid_argument) {
         std::cout << "Invalid Input." << std::endl;
     }
